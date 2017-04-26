@@ -1,0 +1,25 @@
+corr<-function(directory,threshold=0){
+  d<-paste("C:/Users/user/Desktop/",directory,sep="")
+  setwd(d)
+  a<-list.files(path=d)
+  s<-vector()
+  co<-vector()
+  for(i in 1:332)
+  {
+    f<-read.csv(a[i])
+    n<-complete.cases(f[,"sulfate"],f[,"nitrate"])
+    s[i]=sum(n)
+    if(s[i]>threshold){
+      f<-read.csv(a[i])
+      n<-complete.cases(f[,"sulfate"],f[,"nitrate"])
+      co<-c(co,cor(f[n,"sulfate"],f[n,"nitrate"]))
+      }
+  }
+  if(length(co)>0){
+    co
+  }
+  else{
+    co<-0
+    co
+  }
+}
